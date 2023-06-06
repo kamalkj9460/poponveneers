@@ -1,0 +1,24 @@
+{% if shop.metafields.loox["global_stats"] %}
+{% assign looxstats = shop.metafields.loox["global_stats"] | split: "," %}
+<div itemscope itemtype="https://schema.org/Product">
+<meta itemprop="name" content="{{ shop.name | escape }}"/>
+<div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+<meta itemprop="ratingValue" content="{{ looxstats[0] }}"/>
+<meta itemprop="ratingCount" content="{{ looxstats[1] }}"/>
+</div>
+</div>
+{% endif %}
+<section class="section section--page page">
+	<div class="container container--tiny">
+		<div class="section__title section__title--center">
+            <h1 class="section__title-text h2">{{ page.title }}</h1>
+        </div>
+
+        <div class="page__content rte">
+      		{{ page.content }}
+    	</div>
+	</div>
+</section>
+<div id="looxReviews" data-loox-aggregate="" class="loox-reviews-default"></div>
+
+<div style="padding:25px 0 40px;"><a href="https://poponveneers.com/pages/am-i-a-candidate" title="Am I a candidate"><img src="https://cdn.shopify.com/s/files/1/0382/1761/3450/files/The_pop_on_benefits_before_am_I_a_candidate_2_1_600x600.png?v=1658329978" alt="Am I a candidate, just 1 quesion" style="display: block; margin-left: auto; margin-right: auto;"></a></div>
