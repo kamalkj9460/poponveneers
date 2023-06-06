@@ -4,8 +4,8 @@
             <a href="{{ article.url }}" class="home-blog__link blog-link">
                 <div class="blog__media">
                     {% if crop %}
-                        <img class="home-blog__media-img blog__img lazyloaded lazy2 js" alt="{{ article.title }}"
-                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                        <img class="home-blog__media-img blog__img lazyloaded js" alt="{{ article.title }}"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad"
                             data-sizes="auto"
                             data-src="{{ article.image | img_url: '900x500', crop: 'center' }}"
                             data-srcset="{{ article.image | img_url: '360x200', crop: 'center' }} 360w,
@@ -19,8 +19,8 @@
                                 src="{{ article.image | img_url: '900x500', crop: 'center' }}">
                         </noscript>
                     {% else %}
-                        <img class="home-blog__media-img blog__img lazyloaded lazy2 js" alt="{{ article.title }}"
-                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                        <img class="home-blog__media-img blog__img lazyloaded js" alt="{{ article.title }}"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad"
                             data-sizes="auto"
                             data-src="{{ article.image | img_url: '900x' }}"
                             data-srcset="{{ article.image | img_url: '360x' }} 360w,

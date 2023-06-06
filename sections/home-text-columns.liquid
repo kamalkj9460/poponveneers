@@ -32,7 +32,7 @@
                             <div class="home-inline__item">
                                 {% unless block.settings.image == blank %}
                                     <div class="home-inline__media">
-                                        {{ block.settings.image | img_url: '220x' | img_tag: block.settings.image.alt, 'home-inline__media-img lazy2' | replace: " src=", " data-src=" }}
+                                        {{ block.settings.image | img_url: '220x' | img_tag: block.settings.image.alt, 'home-inline__media-img' | replace: " src=", " data-class='LazyLoad' data-src=" }}
                                     </div>
                                 {% endunless %}
                                 <div class="home-inline__text{% if block.settings.image == blank %} home-inline__text--full{% endif %}">

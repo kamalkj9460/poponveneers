@@ -75,12 +75,22 @@
                                         <div class="u-flex-parent">
                                             <div class="home-image-grid__item home-image-grid__item--image u-flex u-flex--{{ block.settings.text_alignment }}{% if grid_item_width == '1/3' %} home-image-grid__item--p-{% endif %}">
                                                 {% if block.settings.image %}
-                                                <div class="home-image-grid__bg--cover u-bg-contain u-bg-overlay lazybg" style="background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=);" data-style="background-image: url('{{ block.settings.image | img_url: '1x1' }}')"></div>
+                                                <div class="home-image-grid__bg--cover u-bg-contain u-bg-overlay" style="background-image: url('{{ block.settings.image | img_url: '1x1' }}')"></div>
                                                 {% endif %}
-                                                <div class="home-image-grid__bg home-image-grid__bg--{{ block.id }} u-bg-cover u-bg-overlay u-bg-overlay--light{% if block.settings.title == blank and block.settings.text == blank %} home-image-grid__bg--no-overlay{% endif %}  img-lazyload lazyloaded lazybg js"
-                                                    style="background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=);"
-													data-style="background-image:url({{ block.settings.image | img_url: '1512x' }})"
-													data-mobstyle="background-image:url({{ block.settings.image | img_url: '720x' }})"
+                                                <div class="desktop_view home-image-grid__bg home-image-grid__bg--{{ block.id }} u-bg-cover u-bg-overlay u-bg-overlay--light{% if block.settings.title == blank and block.settings.text == blank %} home-image-grid__bg--no-overlay{% endif %}  img-lazyload lazyloaded js"
+                                                    style="background-image:url({{ block.settings.image | img_url: '1512x' }})"
+                                                    data-sizes="auto"
+                                                    data-parent-fit="cover"
+                                                    {% if block.settings.image %}
+                                                    style="background-position: center {{ block.settings.image_alignment }};"
+                                                    {% endif %}>
+                                                    {% if block.settings.image == blank %}
+                                                        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                                                        {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="mobile_view home-image-grid__bg home-image-grid__bg--{{ block.id }} u-bg-cover u-bg-overlay u-bg-overlay--light{% if block.settings.title == blank and block.settings.text == blank %} home-image-grid__bg--no-overlay{% endif %}  img-lazyload lazyloaded js"
+                                                    style="background-image:url({{ block.settings.image | img_url: '720x' }})"
                                                     data-sizes="auto"
                                                     data-parent-fit="cover"
                                                     {% if block.settings.image %}

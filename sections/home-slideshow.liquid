@@ -46,11 +46,14 @@
                                 
                                 <div class="theme-spinner theme-spinner--white"></div>
 
-                                <div class="home-carousel__bg home-carousel__bg--{{ section.id }}{{ forloop.index0 }} u-bg-cover u-bg-overlay img-lazyload lazyload js"
-                                    data-bgset="{% include 'bgset', image: block.settings.image %}"
+                                <div class="home-carousel__bg home-carousel__bg--{{ section.id }}{{ forloop.index0 }} u-bg-cover u-bg-overlay img-lazyload lazyloaded desktop_view js"
                                     data-sizes="auto"
                                     data-parent-fit="cover"
-                                    style="background-position: center {{ block.settings.image_alignment }}"></div>
+                                    style="background-image: url('{{ block.settings.image | img_url: '1512x' }}'); background-position: center {{ block.settings.image_alignment }}"></div>
+                                <div class="home-carousel__bg home-carousel__bg--{{ section.id }}{{ forloop.index0 }} u-bg-cover u-bg-overlay img-lazyload lazyloaded mobile_view js"
+                                    data-sizes="auto"
+                                    data-parent-fit="cover"
+                                    style="background-image: url('{{ block.settings.image | img_url: '540x' }}'); background-position: center {{ block.settings.image_alignment }}"></div>
                                 <noscript>
                                     <div class="home-carousel__bg home-carousel__bg--{{ section.id }}{{ forloop.index0 }} u-bg-cover u-bg-overlay" 
                                         style="background-position: center {{ block.settings.image_alignment }};background-image: url('{{ block.settings.image | img_url: '1400x' }}');">
