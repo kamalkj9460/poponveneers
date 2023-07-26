@@ -1,0 +1,185 @@
+<div id="overlay"></div>
+
+<div id="floating-atc-bar-id" class="floating-atc-bar">
+  <button id="floating-modal-trigger" class="select-options-btn c-btn c-btn--full c-btn--plus c-btn--primary product-single__add-btn js-product-add">Add to Cart</button>
+  <div id="floating-modal" class="floating-atc-modal">
+    <span id="floating-modal-close" class="floating-atc-close-btn"><i class="icon icon--close"></i></span>
+
+    {% include 'product-price-with-note' %}
+    
+    {% assign form_id = product_id_attr | append: '-floating-atc' %}
+    {% form 'product', product, class: "product-single__form js-product-form product-form-floating-atc", id: form_id %}
+
+        {% assign hide_default_title = false %}
+        {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+            {% assign hide_default_title = true %}
+        {% endif %}
+
+        {% if settings.product_reviews %}
+            <div class="product-single__reviews-stars">
+                <a href="#acc-reviews" class="product-single__reviews-stars-link js-accordion-scroll js-accordion-trigger">
+                    <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+                </a>
+            </div>
+        {% endif %}
+
+        <div class="product-single__variant product-single__variant--{{ section.settings.product_variant_style }}"> 
+            {% unless hide_default_title %}
+                {% if section.settings.product_variant_style == 'buttons' or section.settings.product_variant_style == 'swatches' %}
+                    <div class="product-single__swatches">
+                        {% for option in product.options_with_values %}
+                            {% include 'product-swatch', style: section.settings.product_variant_style, custom_scope: '-floating-atc' %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endunless %}
+
+        </div>
+
+        {% comment %}
+        {% if section.settings.show_quantity_selector %}
+            <div class="product-single__qty">
+                <label for="Quantity" class="quantity-selector">{{ 'products.product.quantity' | t }}</label>
+                <div class="product-single__qty-input">
+                    <input type="number" id="Quantity" name="quantity" value="1" min="1" class="quantity-selector">
+                </div>
+            </div>
+        {% endif %}
+        {% endcomment %}
+
+        {% if section.settings.show_inventory %}
+            <p class="product-single__stock-note js-price-stock-note" data-qty-limit="{{ section.settings.inventory_limit }}" {% if current_variant.inventory_management == "shopify" and current_variant.available %}{% unless current_variant.inventory_quantity <= section.settings.inventory_limit %} style="display:none;"{% endunless %}{% endif %}>{{ 'products.product.qty_notice_html' | t: count: current_variant.inventory_quantity }}</p>
+        {% endif %}
+
+        <div class="product-single__add js-product-buttons{% unless product.available %} product-single__add--sold{% endunless %}">
+
+            <button id="floating-atc-btn" type="submit" name="add" class="c-btn c-btn--full c-btn--plus c-btn--{% if section.settings.enable_payment_button %}light{% else %}primary{% endif %} product-single__add-btn js-product-add">
+                <span class="js-product-add-text">{{ 'products.product.add_to_cart' | t }}</span>
+            </button>
+
+        </div>
+    
+    {% endform %}
+    {% comment %}{% form 'product', product, class: "product-single__form js-product-form", id:product_id_attr %}
+    
+      {% assign hide_default_title = false %}
+      {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+          {% assign hide_default_title = true %}
+      {% endif %}
+      
+      <div class="floating-atc-options">
+    
+        <div class="product-single__variant product-single__variant--dropdowns">
+      
+            <select name="id" id="productSelect-1" class="product-single__variant-select js-product-variant-select">
+                {% for variant in product.variants %}
+                    {% if variant.available %}
+                        <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}"{% if section.settings.show_inventory %} data-qty="{{ variant.inventory_quantity }}"{% endif %}>{{ variant.title }}</option>
+                    {% else %}
+                        <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+      
+        </div>
+      
+        <div class="product-single__add js-product-buttons{% unless product.available %} product-single__add--sold{% endunless %}">
+      
+            <button type="submit" name="add" class="c-btn c-btn--full c-btn--plus c-btn--{% if section.settings.enable_payment_button %}light{% else %}primary{% endif %} product-single__add-btn js-product-add">
+                <span class="js-product-add-text">{{ 'products.product.add_to_cart' | t }}</span>
+            </button>
+            {% if section.settings.enable_payment_button %}
+                {{ form | payment_button }}
+            {% endif %}
+      
+        </div>
+        
+      </div>
+    
+    {% endform %}{% endcomment %}
+  </div>
+</div>
+
+<script>
+  /*var insideModal = document.getElementById("floating-modal");
+  
+  document.addEventListener('click', function(event) {
+    if (insideModal.classList.contains('show')) {
+      if (event.target != insideModal) {
+        document.getElementById("floating-modal").classList.remove('show');
+      }
+    }
+  });*/
+
+  var overlayElement = document.getElementById("overlay");
+  
+  var trigger = document.getElementById("floating-modal-trigger");
+  trigger.addEventListener("click", function(e) {
+    document.getElementById("floating-modal").classList.add('show');
+    overlayElement.classList.add('active');
+  });
+  
+  var closeTrigger = document.getElementById("floating-modal-close");
+  closeTrigger.addEventListener("click", function(e) {
+    document.getElementById("floating-modal").classList.remove('show');
+    overlayElement.classList.remove('active');
+  });
+
+
+  
+  var btn = document.getElementById("floating-atc-btn");
+  var link = document.getElementById("primary-atc-btn");
+  
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    link.click();
+  });
+
+  // trigger click on modal input label when option is changed on main form, and vice versa
+  var handleLinkedInputChange = (event) => {
+    let currentScope = event.currentTarget.dataset.scope;
+    let unscopedId = event.currentTarget.dataset.unscopedId;
+    
+    let matchedElement = document.querySelector(`.product-single__swatch__input[data-unscoped-id="${unscopedId}"]:not([data-scope="${currentScope}"])`);
+    if (matchedElement == null) return false;
+
+    matchedElement.removeEventListener('change', handleLinkedInputChange);
+    matchedElement.checked = true;
+    matchedElement.dispatchEvent(new Event('change'));
+    matchedElement.addEventListener('change', handleLinkedInputChange);
+  }
+  
+  let formInputs = document.querySelectorAll('.product-single__swatch__input[data-unscoped-id][data-scope]');
+  formInputs.forEach((element) => element.addEventListener('change', handleLinkedInputChange));
+
+  /*const modal = document.getElementById('floating-modal');
+  
+  modal.addEventListener('click', (event) => {
+    const isButton = event.target.nodeName === 'INPUT';
+    if (!isButton) {
+      return;
+    }
+  
+    console.dir(event.target.id);
+  })*/
+  
+  /*$(function() {
+      $('.floating-atc button[type="submit"]').on('click', function(e) {
+          e.preventDefault();
+          $('.Product__Wrapper .Product__Info form.ProductForm button[type="submit"]').trigger('click');
+      });
+  });*/
+
+  myID = document.getElementById("floating-atc-bar-id");
+  
+  var myScrollFunc = function() {
+    var y = window.scrollY;
+    if (y >= 1250) {
+      myID.className = "floating-atc-bar show"
+    } else {
+      myID.className = "floating-atc-bar hide"
+    }
+  };
+  
+  window.addEventListener("scroll", myScrollFunc);
+</script>

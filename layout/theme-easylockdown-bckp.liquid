@@ -1,0 +1,362 @@
+<!doctype html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="{{ shop.locale }}"> <![endif]-->
+<!--[if IE 9 ]><html class="ie9 no-js" lang="{{ shop.locale }}"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="no-js" lang="{{ shop.locale }}"> <!--<![endif]-->
+    <head>
+{% comment %}EasylockdownHeadBegin{% endcomment %}{% capture elhRender %}{% render 'easylockdown_head', easylockdownRender: true, easylockdownOnlySpecialPriceSelector: easylockdownOnlySpecialPriceSelector, easylockdownCustomPriceSelector: easylockdownCustomPriceSelector %}{% endcapture %}{% assign elhRender = elhRender | split: '--elhResults--'%}{{ elhRender[0] }}{% comment %}EasylockdownHeadEnd{% endcomment %}
+
+       
+           <!-- EZGIFT APP SCRIPT IMP TO CART -->
+          {% if customer %}
+              <script type="text/javascript" src="https://cdn.506.io/eg/script.js?shop=pop-on-veneers.myshopify.com&isCustomer=true&tags={{ customer.tags | join: "," }}"></script>
+          {% else %}
+              <script type="text/javascript" src="https://cdn.506.io/eg/script.js?shop=pop-on-veneers.myshopify.com"></script>
+          {% endif %}
+        <!-- END EZGIFT APP SCRIPT IMP TO CART -->
+
+        {% render 'wnw_header' %}
+        <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P48PB3L');</script>
+<!-- End Google Tag Manager -->
+        <!-- Begin: Northbeam pixel -->
+        <script type="lazyload_int">var r;(n=r=r||{}).A="identify",n.B="trackPageView",n.C="fireEmailCaptureEvent",n.D="fireCustomGoal",n.E="firePurchaseEvent";var n="//j.northbeam.io/ota-sp/51cad550-bf67-486b-9a2b-9b39e782df29.js";function t(n){for(var e=[],r=1;r<arguments.length;r++)e[r-1]=arguments[r];a.push({fnName:n,args:e})}var a=[],e=((e={_q:a})[r.A]=function(n,e){return t(r.A,n,e)},e[r.B]=function(){return t(r.B)},e[r.C]=function(n,e){return t(r.C,n,e)},e[r.D]=function(n,e){return t(r.D,n,e)},e[r.E]=function(n){return t(r.E,n)},window.Northbeam=e,document.createElement("script"));e.async=!0,e.src=n,document.head.appendChild(e);</script>
+        <!-- End: Northbeam pixel -->
+        <!--Google Site Verification   -->
+        <meta name="google-site-verification" content="O9w9EZAAbBzwUEtGdIX5p0z1AN7OKSKpPbWUy6crhxE" />    
+        
+        <!-- Wicked Google Tag Manager   -->
+        <script type="lazyload_int" data-src="https://widget.wickedreports.com/v2/4217/wr-6a49f1d124ac7b46643eb7db11a0eae9.js"></script>    
+        <!-- Google Optimize  -->
+        <script type="lazyload_int" data-src="https://www.googleoptimize.com/optimize.js?id=GTM-W7C6TV3"></script>          
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+        <meta name="theme-color" content="{{ settings.color_brand }}">
+        <link rel="canonical" href="{{ canonical_url }}">
+        {% include 'network' %}
+        {% if settings.favicon != blank %}
+            <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+        {% endif %}
+        <!-- Title and description ================================================== -->
+        <title>
+            {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+        </title>
+        {% if page_description %}
+            {% if canonical_url contains '/blogs/' %}
+                {%- assign og_description = page_description | default: shop.description | default: shop.name -%}
+                <meta name="description" content="Pop On Veneers are beautiful instant veneers. Watch {{ article.content | strip_html | truncatewords: 1 | remove: '...' }} {{ page_title }} full review in this post. Snap on veneers that clip on for an instant smile. At-home impression kit directly to customers, made from high end material, thin, durable, natural looking. Cover missing teeth, gaps and stains. Affordable. Painless. No shaving teeth. No dentist visit.">
+            {% else %}
+                {% if canonical_url contains '/pages/more-videos' %}
+                    <meta name="description" content="{{ page.title }} {{ page_description | escape }}">
+                {% else %}
+                    <meta name="description" content="{{ page_description | escape }}">
+                {% endif %}
+            {% endif %}    
+        {% endif %}
+        {% include 'social-meta-tags' %}
+        <!-- JS before CSSOM =================================================== -->
+        <script type="text/javascript">
+            theme = {};
+            theme.t = {};
+            theme.map = {};
+            theme.cart_ajax = {{ settings.cart_ajax }};
+        </script>
+        {% if template contains 'cart' or template contains 'product' %}
+            <script defer src="{{ 'lazysizes.min.js' | asset_url }}"></script>
+        {% else %}
+            <script type="lazyload_int" data-src="{{ 'lazysizes.min.js' | asset_url }}"></script>
+        {% endif %}
+        
+        <script defer src="{{ 'vendor.min.js' | asset_url }}"></script>
+        <script defer src="{{ 'ajax-cart.min.js' | asset_url }}"></script>
+        <!-- CSS ================================================== -->
+        {% if template contains 'index' %} 
+            {% render 'homepage-critical-css' %}
+        {% else %}
+            {% render 'theme-critical-css' %}
+        {% endif %}        
+      	
+        {% include 'css-include' %}
+        <!-- JS after CSSOM=================================================== -->
+        {% if template contains 'cart' or template contains 'product' %}
+            <script defer src="https://s3.eu-west-1.amazonaws.com/production-klarna-il-shopify-osm/c6f201ec5831ece50b964563a71f27f2850784a9/pop-on-veneers.myshopify.com-1685008612152.js?shop=pop-on-veneers.myshopify.com"></script>
+            <script defer src="{{ 'theme.min.js' | asset_url }}"></script>
+            <script defer src="{{ 'custom.js' | asset_url }}"></script>
+        {% else %}
+            <script type="lazyload_int" data-src="{{ 'theme.min.js' | asset_url }}"></script>
+            <script type="lazyload_int" data-src="{{ 'custom.js' | asset_url }}"></script>    
+        {% endif %}
+        
+        {% if settings.anim_load %}
+            <script src="{{ 'scrollreveal.min.js' | asset_url }}"></script>
+        {% endif %}
+        {% if template contains 'customers' %}
+            <script src="{{ 'shopify_common.js' | shopify_asset_url }}"></script>
+        {% endif %}
+        <!-- Header hook for plugins ================================================== -->
+        {%- if request.design_mode or template contains 'cart' or template contains 'checkout' -%}
+            {{ content_for_header }}
+        {%- else -%}
+            {% capture content_for_header2 %}{{ content_for_header }}{% endcapture %}
+            {{ content_for_header2 | replace: ' defer="defer" ', ' type="lazyload_int" ' | replace: " src=", " data-src="| replace: "DOMContentLoaded", "w3-DOMContentLoaded" | replace: "window.addEventListener('load', asyncLoad, false);", "window.addEventListener('w3-DOMContentLoaded', asyncLoad, false);" | replace: "addEventListener('load', prefetchAssets);", "addEventListener('w3-DOMContentLoaded', prefetchAssets);" }}
+            <script>var trekkie=[];trekkie.integrations=!0;window.BOOMR={},window.BOOMR.version=true;</script>
+        {%- endif -%}
+        {% if template contains 'product' %}
+            <script defer src="https://cdn.shopify.com/s/files/1/0382/1761/3450/t/22/assets/affirmShopify.js?v=1644419645\u0026shop=pop-on-veneers.myshopify.com"></script>
+            <script defer src="https://s3.eu-west-1.amazonaws.com/production-klarna-il-shopify-osm/c6f201ec5831ece50b964563a71f27f2850784a9/pop-on-veneers.myshopify.com-1685008612152.js?shop=pop-on-veneers.myshopify.com"></script>
+        {% else %}
+            <script type="lazyload_int" data-src="https://cdn.shopify.com/s/files/1/0382/1761/3450/t/22/assets/affirmShopify.js?v=1644419645\u0026shop=pop-on-veneers.myshopify.com"></script>
+            <script type="lazyload_int" data-src="https://s3.eu-west-1.amazonaws.com/production-klarna-il-shopify-osm/c6f201ec5831ece50b964563a71f27f2850784a9/pop-on-veneers.myshopify.com-1685008612152.js?shop=pop-on-veneers.myshopify.com"></script>            
+        {% endif %}        
+        {% if canonical_url contains '/pages/refer' %}
+            <script async src="https://static.fbot.me/shopify/friendbuy-shopify.js?merchantId=9d25411f-2430-40fe-918f-14eaf084e652\u0026shop=pop-on-veneers.myshopify.com"></script>
+        {% else %}
+            <script type="lazyload_int" data-src="https://static.fbot.me/shopify/friendbuy-shopify.js?merchantId=9d25411f-2430-40fe-918f-14eaf084e652\u0026shop=pop-on-veneers.myshopify.com"></script>
+        {% endif %}
+        
+        {% if template contains 'cart' %}
+          {% include 'sca.freegifts' %}
+        {% endif %}
+        {% include 'friendbuy' %}
+        {% render "geo" %}
+		{{ shop.metafields.loox["global_html_head"] }}  	  
+        {% if canonical_url contains 'es.' %}
+            {% render 'weglot_hreftags' %}
+            {% render 'weglot_switcher' %}      
+            <!-- Spanish Trans App -->      
+            {%- assign full_url = canonical_url | split: '://www.' | last | split: '://' | last -%}
+            <link rel="alternate" hreflang="en" href="{{ canonical_url }}">
+            <link rel="alternate" hreflang="es" href="https://es.{{ full_url }}">
+            <script type="lazyload_int" data-src="https://cdn.weglot.com/weglot.min.js" ></script>
+            <script type="lazyload_int">
+                Weglot.initialize({
+                    api_key: 'wg_47a839f15380f05ce77055380cc933be5'
+                });
+            </script>      
+            <!-- End Spanish Trans App -->   
+        {% endif %}
+        {% render 'custom-css' %}
+    </head>
+    <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" data-anim-fade="{{ settings.anim_fade }}" data-anim-load="{{ settings.anim_load }}" data-anim-interval-style="{{ settings.anim_interval_style }}" data-anim-zoom="{{ settings.anim_zoom }}" data-anim-interval="{% if settings.anim_load_style == 'interval' %}true{% else %}false{% endif %}">
+        <script>window.KlarnaThemeGlobals={};{%case template.name%} {%when"product"%} {% if product.first_available_variant.price %}window.KlarnaThemeGlobals.data_purchase_amount = {{ product.first_available_variant.price }};{% endif %}window.KlarnaThemeGlobals.productVariants={{product.variants|json}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%when"cart"%} window.KlarnaThemeGlobals.data_purchase_amount={{cart.total_price}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%endcase%}</script>
+        <script type="text/javascript">
+          <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P48PB3L"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+            //loading class for animations
+            document.body.className += ' ' + 'js-theme-loading';
+            setTimeout(function(){
+                document.body.className = document.body.className.replace('js-theme-loading','js-theme-loaded');
+            }, 300);
+        </script>      
+        <div class="page-transition"></div>
+        <div class="page-container">
+            {% section 'mobile-drawer' %}
+            {% section 'header' %}
+            <div class="main">
+                {% comment %}{{ content_for_layout }}{% endcomment %}{% render 'easylockdown_body', content_for_layout: content_for_layout, elhDefines: elhRender[1] %}
+            </div>
+            {% unless template contains 'cart' %}
+                {% section 'footer' %}
+            {% endunless %}
+            {% section 'promo-pop' %}
+            {% section 'age-checker' %}
+        </div>
+        {% if settings.search_enable %}
+            <div class="search-draw js-search-draw mfp-hide">
+                <div class="search-draw__wrapper">
+                    <div class="search__head">
+                        <div class="search__label">
+                            <h3 class="search__label-title">{{ 'general.search.label' | t }}</h3>
+                        </div>
+                    </div>
+                    <div class="search__inner">
+                        <form action="{{ routes.search_url }}" method="get" class="search__form" role="search">
+                            <input type="hidden" name="type" value="{{ settings.search_limit }}">
+                            <input type="search" name="q" class="search__form-input js-search-input" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
+                            <button type="submit" class="search__form-submit">
+                                <i class="icon icon--search" aria-hidden="true"></i>
+                                <span class="icon-fallback__text">{{ 'general.search.submit' | t }}</span>
+                            </button>
+                        </form>
+                        {% assign search_nav = settings.search_linklist %}
+                        {% if linklists[search_nav].links.size > 0 %}
+                            <div class="search__nav">
+                                <h4 class="search__nav-title h5">{{ linklists[search_nav].title }}</h4>
+                                <ul class="search__nav-items o-list-bare">
+                                    {% for link in linklists[search_nav].links %}
+                                        <li class="search__nav-item">
+                                            <a href="{{ link.url }}" class="search__nav-link">{{ link.title }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="ajaxcart-draw js-cart-draw mfp-hide">
+            <div class="ajaxcart-draw__wrapper js-cart-draw-inner">
+                <div class="ajaxcart-draw__scroll">
+                    <div class="ajaxcart__head">
+                        <div class="ajaxcart__label">
+                            <h3 class="ajaxcart__label-title">{{ 'cart.general.title' | t }}</h3>
+                        </div>
+                    </div>
+                    <div id="CartContainer"></div>
+                    <div id="EmptyCart">
+                        <div class="ajaxcart-empty">
+                            <h5 class="ajaxcart-empty__title">{{ 'cart.general.empty' | t }}</h5>
+                            <span class="emoji ajaxcart-empty__emoji">
+                                <i class="icon icon--sad"></i>
+                            </span>
+                            <a href="{{ routes.root_url }}" class="c-btn c-btn--primary c-btn--full">{{ 'cart.general.empty_link' | t }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        {% include 'ajax-cart-template' %}
+        <script>
+            //cart functions
+            theme.ajaxCartInit = function() {
+                ajaxCart.init({
+                    cartContainer: '#CartContainer',
+                    cartCountSelector: '#CartCount',
+                    cartCostSelector: '#CartCost',
+                    emptySelector: '#EmptyCart',
+                    {% if settings.cart_ajax %}
+                    triggerSelector: '.js-cart-trigger',
+                    formSelector: '.js-product-form',
+                    addToCartSelector: '.js-product-add',
+                    {% endif %}
+                    moneyFormat: {{ shop.money_format | json }}
+                });
+            };
+        </script>    
+        <!-- Venue theme by Safe As Milk - http://safeasmilk.co/ -->
+        <!-- Theme version 4.6.2 -->    
+        {% comment %} 
+            <!-- Insert QuadPay Widget Lite -->
+            <script type="lazyload_int" data-src="https://widgets.quadpay.com/quadpay-shopify.js"></script>
+            <!-- quadpay.js Library -->
+            <script type="lazyload_int" data-src="https://cdn.us.zip.co/v1/quadpay.js"></script>
+        {% endcomment %}
+        {% comment %} Old Klaviyo Code prior to Jan 2022  {% endcomment %}
+        {% if template contains 'cart' or canonical_url contains '/pages/am-i-a-candidate' or canonical_url contains '/pages/reviews' or canonical_url contains '/pages/your-payment-plan-options' %}
+            <script src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=Y3wcx7"></script> 
+        {% else %}
+            <script type="lazyload_int" data-src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=Y3wcx7"></script> 
+        {% endif %}
+        {% comment %} 
+            <!--New Potential Klaviyo Code prior to Jan 2022 -->
+            <!-- <script type="lazyload_int" data-src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=Y3wcx7"></script>-->
+        {% endcomment %}
+        {% if canonical_url contains '/pages/reviews' %}
+            {{ shop.metafields.loox["global_html_body"] }}
+        {% else %}
+            {{ shop.metafields.loox["global_html_body"] | replace : '<script async src="' , '<script type="lazyload_int" data-src="' }}
+        {% endif %}
+	    
+        {% if template contains 'cart' %}
+            {% include 'appikon-discounts' %}
+        {% endif %}
+        {% comment %}
+            <!--Gorgias Chat Widget Start-->
+            <script id="gorgias-chat-widget-install-v3" src="https://config.gorgias.chat/bundle-loader/01GYCC8WAZZ0BQW64TWT8WZFDP?source=shopify1click"></script>
+            <script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});</script>
+            <!--Gorgias Chat Widget End-->
+            {% if template.name == 'index' or canonical_url contains '/pages/pricing' or canonical_url contains '/pages/reviews' or canonical_url contains '/pages/how-it-works' or canonical_url contains 'https://help.poponveneers.com/en-US' %}
+                <div class="am-i-a-candidate-bar">
+                    <div class="am-i-a-candidate-inner">
+                    <div class="am-i-a-candidate-text">
+                        <h6>Am I a candidate?</h6>
+                        <p>Answer <span style="font-weight:700;">1 simple question</span> to find out!</p>
+                    </div>
+                    <div class="am-i-a-candidate-button"><a href="/pages/am-i-a-candidate" class="c-btn c-btn--full c-btn--arrow c-btn--white">Find Out Now!</a></div>
+                    </div>
+                </div>
+                <div class="am-i-a-candidate-floating-btn">
+                    <a href="/pages/am-i-a-candidate" class="c-btn c-btn--full c-btn--arrow c-btn--primary">Am I A Candidate?</a>
+                </div>
+            {% endif %}
+        {% endcomment %}     
+        <!-- Begin Shopify-Afterpay JavaScript Snippet (v1.1.1) -->
+        {% if cart.currency.iso_code == shop.currency %}
+            <script type="text/javascript">
+                // Overrides:
+                // var afterpay_min = 0.04;       // As per your Afterpay contract.
+                // var afterpay_max = 2000.00;    // As per your Afterpay contract.
+                // var afterpay_msg_size = 'md';  // Can be 'xs', 'sm', 'md' or 'lg'.
+                // var afterpay_logo_theme = 'colour';  // Can be 'colour', 'black' or 'white'.
+                // var afterpay_modal_open_icon = true;
+                // var afterpay_hide_upper_limit = false;
+                // var afterpay_hide_lower_limit = true;
+                // var afterpay_show_if_outside_limits = true;
+                // var afterpay_cbt_enabled = false;
+                // var afterpay_product_integration_enabled = true;
+                var afterpay_product_selector = '.afterpayPlacement';
+                // var afterpay_variable_price_fallback = false;
+                // var afterpay_variable_price_fallback_selector = '';
+                // var afterpay_variable_price_fallback_method = 'mutation';  // Can be 'mutation' or 'interval'.
+                // var afterpay_cart_integration_enabled = true;
+                var afterpay_cart_static_selector = '.afterpayPlacement';
+                // var afterpay_variable_subtotal_fallback = false;
+                // var afterpay_variable_subtotal_fallback_selector = '';
+                // var afterpay_variable_subtotal_fallback_method = 'mutation'; // Can be 'mutation' or 'interval'.
+                // var afterpay_cart_dynamic_integration_enabled = false;
+                // var afterpay_footer_logo_enabled = true;
+                // var afterpay_footer_logo_format = 'icon';  // Can be 'icon', 'stacked' or 'logo'.
+                // var afterpay_footer_logo_theme = 'colour'; // Can be 'colour', 'black' or 'white'.
+                // var afterpay_footer_logo_background = 'border';  // Can be 'border' or 'transparent'.
+                // var afterpay_footer_logo_container = 'footer ul.payment-icons';
+                // var afterpay_footer_logo_template = '<li class="payment-icon"><object data="{logo_path}" type="image/svg+xml"></object></li>';
+                // Non-editable fields:
+                var afterpay_js_language = {{ localization.language.iso_code | json }};
+                var afterpay_js_country = {{ localization.country.iso_code | json }};
+                var afterpay_shop_currency = {{ shop.currency | json }};
+                var afterpay_cart_currency = {{ cart.currency.iso_code | json }};
+                var afterpay_shop_money_format = {{ shop.money_format | json }};
+                var afterpay_shop_permanent_domain = {{ shop.permanent_domain | json }};
+                var afterpay_theme_name = {{ theme.name | json }};
+                var afterpay_product = {{ product | json }};
+                var afterpay_current_variant = {{ product.selected_or_first_available_variant | json }};
+                var afterpay_cart_total_price = {{ cart.total_price | json }};
+                var afterpay_js_snippet_version = '1.1.1';
+            </script>
+            {% if template contains 'cart' or template contains 'product' %}
+                <script defer src="https://static.afterpay.com/shopify-afterpay-javascript.js"></script>
+            {% else %}
+                <script type="lazyload_int" data-src="https://static.afterpay.com/shopify-afterpay-javascript.js"></script>
+            {% endif %}            
+            
+        {% else %}
+            <!-- Afterpay disabled: {{ cart.currency.iso_code }} != {{ shop.currency }} -->
+        {% endif %}
+        <!-- End Shopify-Afterpay JavaScript Snippet (v1.1.1) --> 
+        {% comment %}
+        {{ 'wnw-optimization.js' | asset_url | script_tag }}
+        {% endcomment %}
+        <script defer src="{{ 'wrap.js' | asset_url }}"></script>
+        <script>
+          var site_nav_link_burger = true;
+          document.addEventListener("DOMContentLoaded", function() {
+              var icon_menu = document.querySelector(".header-trigger .js-mobile-draw-trigger i.icon.icon--menu");
+              icon_menu.addEventListener("click", function() {
+                  if(site_nav_link_burger) {
+                      event.preventDefault();
+                      site_nav_link_burger = false;
+                  }
+              });
+          })
+        </script>      
+        {% render 'wnw_footer' %}
+    </body>
+</html>

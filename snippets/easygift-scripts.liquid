@@ -1,0 +1,8 @@
+<!-- Easy Gift add impression kit script. Do not remove. Do not make lower on page. -->
+<!-- EASYGIFT SCRIPT -->
+    {% if customer %}
+        <script type="text/javascript" src="https://cdn.506.io/eg/script.js?shop=pop-on-veneers.myshopify.com&isCustomer=true&tags={{ customer.tags | join: "," }}"></script>
+    {% else %}
+        <script type="text/javascript" src="https://cdn.506.io/eg/script.js?shop=pop-on-veneers.myshopify.com"></script>
+    {% endif %}
+<!-- END EASYGIFT SCRIPT -->

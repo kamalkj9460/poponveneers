@@ -1,0 +1,48 @@
+<div class="product-single product-single--{{ section.settings.layout }} product-single--text-{{ section.settings.text_color }} product-single--{{product.id}} js-product-{{product.id}}">
+  <div class="product-single__price js-product-price">
+    <h3 class="product-single__price-text js-product-price-text">
+        {% if discounts_enabled %}
+          <span class="u-hidden-visually">{{ 'products.general.sale_price' | t }}</span>
+          <span class="js-product-price-compare">
+              <s class="product-single__price-compare"><span class="money">{{ current_variant.price | money }}</span></s>
+          </span>
+          <span class="u-hidden-visually">{{ 'products.general.regular_price' | t }}</span>
+          <span class="js-product-price-number">
+            {% if variant_discount_initial_amount > main_discount_amount %}
+              <span class="product-single__price-number product-single__price-number--sale"><span class="money">{{ current_variant.price | minus: variant_discount_initial_amount | money }}</span></span>
+            {% else %}
+              <span class="product-single__price-number product-single__price-number--sale"><span class="money">{{ current_variant.price | minus: main_discount_amount | money }}</span></span>
+            {% endif %}
+          </span>
+         {% elsif product_note != "" %}
+          <span class="u-hidden-visually">{{ 'products.general.sale_price' | t }}</span>
+          <span class="js-product-price-compare">
+              <s class="product-single__price-compare"><span class="money">{{ current_variant.price | money }}</span></s>
+          </span>
+          <span class="u-hidden-visually">{{ 'products.general.regular_price' | t }}</span>
+          <span class="product-note">{{ product_note | replace: 'end-accent', '</span>' | replace: 'accent', '<span class="accent-color">' }}</span>
+         {% else %}
+          {% if product.compare_at_price_max > product.price %}
+              <span class="u-hidden-visually">{{ 'products.general.sale_price' | t }}</span>
+              <span class="js-product-price-compare">
+                  <s class="product-single__price-compare"><span class="money">{{ current_variant.compare_at_price | money }}</span></s>
+              </span>
+          {% endif %}
+          <span class="u-hidden-visually">{{ 'products.general.regular_price' | t }}</span>
+          <span class="js-product-price-number">
+              <span class="product-single__price-number{% if product.compare_at_price_max > product.price %} product-single__price-number--sale{% endif %}"><span class="money">{{ current_variant.price | money }}</span></span>
+          </span>
+          {% endif %}
+          <span class="js-product-price-note"></span>
+    </h3>
+  
+    <div class="product-single__price__notes">          
+        <p class="product-single__price__note product-single__price__note--unit js-price-unit-note">
+            {% include 'product-unit-price', variant: current_variant %}
+        </p>
+        {% if section.settings.show_tax_notice %}
+            <p class="product-single__price__note product-single__price__note--tax">{{ 'products.general.include_taxes_html' | t }}</p>
+        {% endif %}
+    </div>
+  </div>
+</div>
