@@ -3,32 +3,27 @@
 <!--[if IE 9 ]><html class="ie9 no-js" lang="{{ shop.locale }}"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
 <html class="no-js" lang="{{ shop.locale }}"> <!--<![endif]-->
-    <head>
-
-
-       
-           <!-- EZGIFT APP SCRIPT IMP TO CART -->
+    <head>    
+          <!-- EZGIFT APP SCRIPT IMP TO CART -->
           {% if customer %}
               <script type="text/javascript" src="https://cdn.506.io/eg/script.js?shop=pop-on-veneers.myshopify.com&isCustomer=true&tags={{ customer.tags | join: "," }}"></script>
           {% else %}
-              <script type="text/javascript" src="https://cdn.506.io/eg/script.js?shop=pop-on-veneers.myshopify.com"></script>
+              <script type="lazyload_int" data-src="https://cdn.506.io/eg/script.js?shop=pop-on-veneers.myshopify.com"></script>
           {% endif %}
         <!-- END EZGIFT APP SCRIPT IMP TO CART -->
-
         {% render 'wnw_header' %}
         <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-P48PB3L');</script>
-<!-- End Google Tag Manager -->
+        <script type="lazyload_int">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-P48PB3L');</script>
+        <!-- End Google Tag Manager -->
         <!-- Begin: Northbeam pixel -->
         <script type="lazyload_int">var r;(n=r=r||{}).A="identify",n.B="trackPageView",n.C="fireEmailCaptureEvent",n.D="fireCustomGoal",n.E="firePurchaseEvent";var n="//j.northbeam.io/ota-sp/51cad550-bf67-486b-9a2b-9b39e782df29.js";function t(n){for(var e=[],r=1;r<arguments.length;r++)e[r-1]=arguments[r];a.push({fnName:n,args:e})}var a=[],e=((e={_q:a})[r.A]=function(n,e){return t(r.A,n,e)},e[r.B]=function(){return t(r.B)},e[r.C]=function(n,e){return t(r.C,n,e)},e[r.D]=function(n,e){return t(r.D,n,e)},e[r.E]=function(n){return t(r.E,n)},window.Northbeam=e,document.createElement("script"));e.async=!0,e.src=n,document.head.appendChild(e);</script>
         <!-- End: Northbeam pixel -->
         <!--Google Site Verification   -->
         <meta name="google-site-verification" content="O9w9EZAAbBzwUEtGdIX5p0z1AN7OKSKpPbWUy6crhxE" />    
-        
         <!-- Wicked Google Tag Manager   -->
         <script type="lazyload_int" data-src="https://widget.wickedreports.com/v2/4217/wr-6a49f1d124ac7b46643eb7db11a0eae9.js"></script>    
         <!-- Google Optimize  -->
@@ -71,7 +66,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {% else %}
             <script type="lazyload_int" data-src="{{ 'lazysizes.min.js' | asset_url }}"></script>
         {% endif %}
-        
         <script defer src="{{ 'vendor.min.js' | asset_url }}"></script>
         <script defer src="{{ 'ajax-cart.min.js' | asset_url }}"></script>
         <!-- CSS ================================================== -->
@@ -84,7 +78,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {% include 'css-include' %}
         <!-- JS after CSSOM=================================================== -->
         {% if template contains 'cart' or template contains 'product' %}
-            <script defer src="https://s3.eu-west-1.amazonaws.com/production-klarna-il-shopify-osm/c6f201ec5831ece50b964563a71f27f2850784a9/pop-on-veneers.myshopify.com-1685008612152.js?shop=pop-on-veneers.myshopify.com"></script>
+
             <script defer src="{{ 'theme.min.js' | asset_url }}"></script>
             <script defer src="{{ 'custom.js' | asset_url }}"></script>
         {% else %}
@@ -117,8 +111,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <script async src="https://static.fbot.me/shopify/friendbuy-shopify.js?merchantId=9d25411f-2430-40fe-918f-14eaf084e652\u0026shop=pop-on-veneers.myshopify.com"></script>
         {% else %}
             <script type="lazyload_int" data-src="https://static.fbot.me/shopify/friendbuy-shopify.js?merchantId=9d25411f-2430-40fe-918f-14eaf084e652\u0026shop=pop-on-veneers.myshopify.com"></script>
-        {% endif %}
-        
+        {% endif %}        
         {% if template contains 'cart' %}
           {% include 'sca.freegifts' %}
         {% endif %}
@@ -144,11 +137,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </head>
     <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" data-anim-fade="{{ settings.anim_fade }}" data-anim-load="{{ settings.anim_load }}" data-anim-interval-style="{{ settings.anim_interval_style }}" data-anim-zoom="{{ settings.anim_zoom }}" data-anim-interval="{% if settings.anim_load_style == 'interval' %}true{% else %}false{% endif %}">
         <script>window.KlarnaThemeGlobals={};{%case template.name%} {%when"product"%} {% if product.first_available_variant.price %}window.KlarnaThemeGlobals.data_purchase_amount = {{ product.first_available_variant.price }};{% endif %}window.KlarnaThemeGlobals.productVariants={{product.variants|json}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%when"cart"%} window.KlarnaThemeGlobals.data_purchase_amount={{cart.total_price}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%endcase%}</script>
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P48PB3L"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
         <script type="text/javascript">
-          <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P48PB3L"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
             //loading class for animations
             document.body.className += ' ' + 'js-theme-loading';
             setTimeout(function(){
@@ -250,15 +243,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <script type="lazyload_int" data-src="https://cdn.us.zip.co/v1/quadpay.js"></script>
         {% endcomment %}
         {% comment %} Old Klaviyo Code prior to Jan 2022  {% endcomment %}
+        
         {% if template contains 'cart' or canonical_url contains '/pages/am-i-a-candidate' or canonical_url contains '/pages/reviews' or canonical_url contains '/pages/your-payment-plan-options' %}
             <script src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=Y3wcx7"></script> 
         {% else %}
             <script type="lazyload_int" data-src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=Y3wcx7"></script> 
         {% endif %}
-        {% comment %} 
-            <!--New Potential Klaviyo Code prior to Jan 2022 -->
-            <!-- <script type="lazyload_int" data-src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=Y3wcx7"></script>-->
-        {% endcomment %}
         {% if canonical_url contains '/pages/reviews' %}
             {{ shop.metafields.loox["global_html_body"] }}
         {% else %}
@@ -335,8 +325,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <script defer src="https://static.afterpay.com/shopify-afterpay-javascript.js"></script>
             {% else %}
                 <script type="lazyload_int" data-src="https://static.afterpay.com/shopify-afterpay-javascript.js"></script>
-            {% endif %}            
-            
+            {% endif %}                        
         {% else %}
             <!-- Afterpay disabled: {{ cart.currency.iso_code }} != {{ shop.currency }} -->
         {% endif %}

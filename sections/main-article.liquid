@@ -6,8 +6,8 @@
         {% if article.image %}
             <div class="container container--mob-0">
                 <div class="article__featured-media" style="background-image: url('{{ article.image.src | img_url: '1x1' }}')">
-                    <div class="article__featured-media__img img-lazyload u-bg-cover lazyload js"
-                        data-bgset="{% include 'bgset', image: article.image.src %}"
+                    <div class="article__featured-media__img img-lazyload u-bg-cover lazyloaded js"
+                        style="background-image: url('{{ article.image.src | img_url: '1400x' }});"
                         data-sizes="auto"
                         data-parent-fit="cover"></div>
                     <noscript>

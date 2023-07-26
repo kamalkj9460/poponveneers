@@ -61,4 +61,56 @@ span.hulkapps-cart-original-total span.zrx-cart-total {
     opacity: 1 !important;
     transform: unset !important;
 }
+
+html:not(.jsload) body#am-i-a-candidate .page__content.rte .klaviyo-form-Ypz867 {
+    min-height: 600px;
+}
+html:not(.jsload) div#looxReviews {
+    min-height: 100vh;
+}
+
+
+/* klarna-placement#klarna-widget {
+    min-height: 30px;
+    width: 100%;
+    display: block;
+}
+
+body[data-anim-zoom=true] .blog__img, body[data-anim-zoom=true] .collection-list__bg, body[data-anim-zoom=true] .home-carousel--image_img, body[data-anim-zoom=true] .home-image-grid__bg {
+    transition: none !important;
+}
+.announcement__link, .blog-link {
+    display: block;
+    transition: none !important;
+} */
+
+@media(min-width:1200px){
+html:not(.jsload) body#eating-with-pop-on-veneers .container--tiny {
+    padding: 0 40px;
+}
+}
+
+.pdp-payment-options span.js-product-price-note {
+    height: 16px !important;
+}
 </style>
+
+
+{% if canonical_url contains "/products/spareveneers" %}
+
+<style>
+span.product-single__price-number {
+    color: #ed5c86 !important;
+}
+</style>
+
+{% endif %}
+
+
+{% if template contains "cart" %}
+<style>    	
+html {
+  background-color: #fff !important;
+}
+</style>      	
+{% endif %}
